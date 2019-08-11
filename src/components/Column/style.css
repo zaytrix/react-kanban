@@ -1,0 +1,46 @@
+.column {
+  flex: 1;
+  font-size: 10pt;
+}
+
+.column:not(:last-child) {
+  margin-right: 25px;
+}
+
+.column header, .column footer {
+  display: flex;
+  align-items: center;
+}
+
+.column header {
+  height: 30px;
+  font-size: 12pt;
+  color: white;
+  text-align: center;
+}
+
+.column footer {
+  padding: 10px;
+  color: #777;
+}
+
+.column header p, .add-item {
+  width: 100%;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  font-size: 12pt;
+  justify-content: center;
+}
+
+.add-item {
+  padding: 10px;
+}
+
+.add-item:hover {
+  color: black;
+}
+
+.add-item svg {
+  margin-right: 5px;
+}
