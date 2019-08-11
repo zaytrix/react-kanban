@@ -10,9 +10,9 @@ const Item = React.memo(({
   moveRight,
 }) => (
   <article className='item'>
-    {moveLeft ? <button onClick={() => moveLeft(index)}><IoIosArrowBack /></button> : <span />}
+    {moveLeft && <button onClick={() => moveLeft(index)}><IoIosArrowBack /></button>}
     <p className='item-text'>{text}</p>
-    {moveRight ? <button href='#' onClick={() => moveRight(index)}><IoIosArrowForward /></button> : <span />}
+    {moveRight && <button href='#' onClick={() => moveRight(index)}><IoIosArrowForward /></button>}
   </article>
 ))
 

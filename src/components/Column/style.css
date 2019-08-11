@@ -29,12 +29,11 @@
   font-weight: 500;
   display: flex;
   align-items: center;
-  font-size: 12pt;
   justify-content: center;
 }
 
 .add-item {
-  padding: 10px;
+  padding: 5px;
 }
 
 .add-item:hover {
