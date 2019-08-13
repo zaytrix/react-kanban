@@ -2,25 +2,49 @@
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  background-color: white;
+
   margin-top: 7px;
 }
 
 .item-text {
   flex: 1;
-  padding: 15px;
+  padding: 10px;
   font-weight: 500;
+  margin: 0 5px;
+  background-color: white;
+  border: 1px solid #BBB;
+  display: flex;
+  flex-direction: row;
 }
 
-.item button {
+.item-text p {
+  flex: 1;
+}
+
+.item-text button {
   display: flex;
   justify-content: center;
   align-content: center;
-  padding: 0 10px;
   font-weight: bold;
   font-size: 14pt;
 }
 
-.item button:hover {
-  background-color: #d8d8d8;
+.item-text button:hover {
+  background-color: rgb(243, 99, 99);
+  color: white;
+}
+
+.item-move {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 0 5px;
+  font-weight: bold;
+  font-size: 14pt;
+  background-color: white;
+  border: 1px solid #BBB;
+}
+
+.item-move:hover {
+  background-color: #DDD;
 }
