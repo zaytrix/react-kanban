@@ -1,45 +1,42 @@
 import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 import { IoMdAdd } from 'react-icons/io'
+
 import './style.css'
 import Item from '../Item'
+import { addItem } from 'redux/actions'
 
-const Column = React.memo(({
-  title,
-  color,
-  items,
-  moveLeft,
-  moveRight,
-  addItem,
-  index,
-}) => (
-  <section className='column'>
-    <header style={{ backgroundColor: color }}>
-      <p>{title}</p>
-    </header>
-    {items.map((text, itemIndex) => (
-      <Item
-        key={itemIndex}
-        index={itemIndex}
-        text={text}
-        moveLeft={moveLeft}
-        moveRight={moveRight}
-      />
-    ))}
-    <footer>
-      <button className='add-item' onClick={() => addItem(index)}><IoMdAdd />Add Item</button>
-    </footer>
-  </section>
-))
+const Column = ({ index: columnIndex }) => {
+  const { title, color, itemIndices } = useSelector(state => {
+    const column = state.columns[columnIndex]
+    const { title, color } = column
+    const itemIndices = column.items.map((_, index) => index)
+    return { title, color, itemIndices }
+  })
 
-Column.propTypes = {
-  title: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired,
-  items: PropTypes.arrayOf(PropTypes.string).isRequired,
-  moveLeft: PropTypes.func,
-  moveRight: PropTypes.func,
-  addItem: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
+  const dispatch = useDispatch()
+
+  const _addItem = () => {
+    const item = window.prompt('Enter Item Text')
+    if (item) {
+      dispatch(addItem({ item, columnIndex }))
+    }
+  }
+
+  return (
+    <section className='column'>
+      <header style={{ backgroundColor: color }}>
+        <p>{title}</p>
+      </header>
+      {itemIndices.map(index => <Item key={index} index={index} columnIndex={columnIndex} />)}
+      <footer>
+        <button className='add-item' onClick={_addItem}><IoMdAdd />Add Item</button>
+      </footer>
+    </section>
+  )
 }
 
-export default Column
+Column.propTypes = { index: PropTypes.number.isRequired }
+
+export default  React.memo(Column)
