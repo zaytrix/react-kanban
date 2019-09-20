@@ -7,29 +7,28 @@ import './style.css'
 import Item from '../Item'
 import { addItem } from 'redux/actions'
 
-const Column = ({ index: columnIndex }) => {
-  const { title, color, itemIndices } = useSelector(state => {
-    const column = state.columns[columnIndex]
-    const { title, color } = column
-    const itemIndices = column.items.map((_, index) => index)
-    return { title, color, itemIndices }
-  })
-
+const Column = ({ id }) => {
+  const { column, itemIds } = useSelector(({ columns, items }) => ({
+    column: columns[id],
+    itemIds: Object.values(items)
+      .filter(item => item.columnId === id)
+      .sort((a, b) => a.order - b.order)
+      .map(({ id }) => id)
+  }))
   const dispatch = useDispatch()
 
   const _addItem = () => {
-    const item = window.prompt('Enter Item Text')
-    if (item) {
-      dispatch(addItem({ item, columnIndex }))
-    }
+    const content = window.prompt('Enter Item Text')
+    if (content) dispatch(addItem({ content, columnId: id }))
   }
 
+  const { title, color } = column
   return (
     <section className='column'>
       <header style={{ backgroundColor: color }}>
         <p>{title}</p>
       </header>
-      {itemIndices.map(index => <Item key={index} index={index} columnIndex={columnIndex} />)}
+      {itemIds.map(id => <Item key={id} id={id} />)}
       <footer>
         <button className='add-item' onClick={_addItem}><IoMdAdd />Add Item</button>
       </footer>
@@ -37,6 +36,6 @@ const Column = ({ index: columnIndex }) => {
   )
 }
 
-Column.propTypes = { index: PropTypes.number.isRequired }
+Column.propTypes = { id: PropTypes.number.isRequired }
 
-export default  React.memo(Column)
+export default React.memo(Column)
