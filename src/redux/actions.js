@@ -2,12 +2,10 @@ import { createActions } from 'redux-actions'
 
 export const {
   addItem,
-  moveItemLeft,
-  moveItemRight,
+  moveItem,
   deleteItem,
 } = createActions(
   'ADD_ITEM',
-  'MOVE_ITEM_LEFT',
-  'MOVE_ITEM_RIGHT',
+  'MOVE_ITEM',
   'DELETE_ITEM',
 )
